@@ -2,3 +2,4 @@
 /common/target/
 /modules/im-server/target/
 /redis/target/
+/.idea/

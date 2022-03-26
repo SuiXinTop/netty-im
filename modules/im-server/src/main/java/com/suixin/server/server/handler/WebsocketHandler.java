@@ -1,10 +1,37 @@
 package com.suixin.server.server.handler;
 
+import com.suixin.server.util.ChannelFactory;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.*;
 
+@ChannelHandler.Sharable
 public class WebsocketHandler extends SimpleChannelInboundHandler<WebSocketFrame> {
+
+    private static final WebsocketHandler INSTANCE = new WebsocketHandler();
+
+    public static WebsocketHandler getInstance() {
+        return INSTANCE;
+    }
+
+    //客户端与服务端创建连接
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) {
+        System.out.println("客户端与服务端连接开启....");
+    }
+
+    //客户端与服务端断开连接
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        try {
+            ChannelFactory.unbind(ctx.channel());
+        } catch (Exception ignored) {
+
+        }
+        System.out.println("客户端与服务端连接关闭....");
+    }
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, WebSocketFrame msg) throws Exception {
         System.out.println("WebsocketHandler");

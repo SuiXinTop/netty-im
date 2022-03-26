@@ -4,10 +4,21 @@ import com.suixin.common.entity.po.ImMsg;
 import com.suixin.server.util.ChannelFactory;
 import com.suixin.server.util.WebSocketResult;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.springframework.stereotype.Component;
 
+@Component
+@ChannelHandler.Sharable
 public class ImMsgHandler extends SimpleChannelInboundHandler<ImMsg> {
+
+    private static final ImMsgHandler INSTANCE = new ImMsgHandler();
+
+    public static ImMsgHandler getInstance() {
+        return INSTANCE;
+    }
+
     //服务器读取消息
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ImMsg msg) {

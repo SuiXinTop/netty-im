@@ -5,48 +5,39 @@ import com.suixin.common.entity.dto.BindMsg;
 import com.suixin.common.entity.dto.TransMsg;
 import com.suixin.common.entity.po.GroupMsg;
 import com.suixin.common.entity.po.ImMsg;
-import com.suixin.server.util.ChannelFactory;
+import com.suixin.server.util.WebSocketResult;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import org.springframework.stereotype.Component;
 
+@ChannelHandler.Sharable
 public class ImServerMsgHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
-    @Override
-    public void handlerAdded(ChannelHandlerContext ctx) {
-        System.out.println("客户端与服务端连接开启....");
-    }
+    private static final ImServerMsgHandler INSTANCE = new ImServerMsgHandler();
 
-    @Override
-    public void handlerRemoved(ChannelHandlerContext ctx) {
-        System.out.println("客户端与服务端连接关闭....");
-    }
-
-    //客户端与服务端创建连接
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) {
-        System.out.println("客户端与服务端连接开启....");
-    }
-
-    //客户端与服务端断开连接
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) {
-        ChannelFactory.unbind(ctx.channel());
-        System.out.println("客户端与服务端连接关闭....");
+    public static ImServerMsgHandler getInstance() {
+        return INSTANCE;
     }
 
     //服务器读取消息
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
         System.out.println("IMServerHandler");
-        TransMsg transMsg = JSON.parseObject(msg.retain().text(), TransMsg.class);
+        TransMsg transMsg = null;
+        try {
+            transMsg = JSON.parseObject(msg.retain().text(), TransMsg.class);
+        } catch (Exception e) {
+            transMsg = new TransMsg(9, 9, "暂不支持该消息");
+        }
         System.out.println(transMsg);
         int action = transMsg.getAction();
         /*
         初始化连接或重连
         初始化channel，关联 channel 和 userid
          */
-        if (action == 0) {
+        if (action == 1) {
             BindMsg bindMsg = JSON.parseObject(msg.text(), BindMsg.class);
             System.out.println(bindMsg);
             ctx.fireChannelRead(bindMsg);
@@ -54,7 +45,7 @@ public class ImServerMsgHandler extends SimpleChannelInboundHandler<TextWebSocke
         /*
         聊天消息处理
          */
-        if (action == 1) {
+        else if (action == 2) {
             //群聊或私聊
             switch (transMsg.getChatType()) {
                 case 0://私聊
@@ -73,17 +64,12 @@ public class ImServerMsgHandler extends SimpleChannelInboundHandler<TextWebSocke
         }
 
         /*
-        消息签收处理
-         */
-        if (action == 2) {
-            //TODO
-        }
-
-        /*
         心跳包处理
          */
-        if (action == 3) {
+        else if (action == 3) {
 
+        } else {
+            ctx.writeAndFlush(WebSocketResult.trans(transMsg));
         }
 
     }

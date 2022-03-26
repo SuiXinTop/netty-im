@@ -2,6 +2,7 @@ package com.suixin.server.server.handler;
 
 import com.suixin.server.util.ChannelFactory;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
@@ -10,7 +11,15 @@ import io.netty.handler.timeout.IdleStateEvent;
 /**
  * 心跳包用户触发
  */
+@ChannelHandler.Sharable
 public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
+
+    private static final HeartBeatHandler INSTANCE = new HeartBeatHandler();
+
+    public static HeartBeatHandler getInstance() {
+        return INSTANCE;
+    }
+
     /**
      * @param ctx
      * @param evt

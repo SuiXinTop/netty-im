@@ -9,11 +9,20 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.IdleStateHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * channel初始化，channelHandler连接
  */
+@Component
 public class ImChannelInitializer extends ChannelInitializer<SocketChannel> {
+
+    @Autowired
+    private ImMsgHandler imMsgHandler;
+
+    @Autowired
+    private GroupMsgHandler groupMsgHandler;
 
     protected void initChannel(SocketChannel sc) {
         ChannelPipeline pipeline = sc.pipeline();
@@ -33,7 +42,7 @@ public class ImChannelInitializer extends ChannelInitializer<SocketChannel> {
                  */
                 .addLast(new IdleStateHandler(100, 100, 120))
                 //自定义的空闲状态检测的handler
-                .addLast(new HeartBeatHandler())
+                .addLast(HeartBeatHandler.getInstance())
                 /*
                  WebSocketServerProtocolHandler 对应websocket，它的数据是以帧(frame)形式传递
                   可以看到 WebSocketFrame 下有六个子类
@@ -41,12 +50,12 @@ public class ImChannelInitializer extends ChannelInitializer<SocketChannel> {
                   核心功能是 将http协议升级为ws协议，保持长连接
                  */
                 .addLast(new WebSocketServerProtocolHandler("/im"))
-                .addLast(new WebsocketHandler())
-                .addLast(new ImServerMsgHandler())
-                .addLast(new BindMsgHandler())
-                .addLast(new ImMsgHandler())
-                .addLast(new GroupMsgHandler())
-                .addLast(new ExceptionHandler())
+                .addLast(WebsocketHandler.getInstance())
+                .addLast(ImServerMsgHandler.getInstance())
+                .addLast(BindMsgHandler.getInstance())
+                .addLast(imMsgHandler)
+                .addLast(groupMsgHandler)
+                .addLast(ExceptionHandler.getInstance())
         ;
     }
 

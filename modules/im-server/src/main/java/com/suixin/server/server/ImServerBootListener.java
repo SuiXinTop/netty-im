@@ -1,6 +1,7 @@
-package com.suixin.server.util;
+package com.suixin.server.server;
 
 import com.suixin.server.server.ImServer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -11,13 +12,17 @@ import org.springframework.stereotype.Component;
  * 并从中找到事件的监听者，此时ApplicationListener接口实例中的onApplicationEvent(E event)方法就会被调用，
  */
 @Component
-public class ImServerBoot implements ApplicationListener<ContextRefreshedEvent> {
+public class ImServerBootListener implements ApplicationListener<ContextRefreshedEvent> {
+    @Autowired
+    private ImServer imServer;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (event.getApplicationContext().getParent() == null) {
             try {
-                ImServer.getInstance().boot();
+                new Thread(() -> {
+                    imServer.boot();
+                }).start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
