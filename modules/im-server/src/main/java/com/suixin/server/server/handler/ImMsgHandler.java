@@ -7,17 +7,16 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 @ChannelHandler.Sharable
 public class ImMsgHandler extends SimpleChannelInboundHandler<ImMsg> {
 
-    private static final ImMsgHandler INSTANCE = new ImMsgHandler();
-
-    public static ImMsgHandler getInstance() {
-        return INSTANCE;
-    }
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     //服务器读取消息
     @Override
@@ -35,7 +34,7 @@ public class ImMsgHandler extends SimpleChannelInboundHandler<ImMsg> {
             //对方不在线
             //存储到redis的List，sender:receiver
             String key = senderId + ":" + receiverId;
-//                        redisTemplate.opsForList().leftPush(key, imMsg);
+            redisTemplate.opsForList().leftPush(key, msg);
         }
         //持久化到im_msg
     }

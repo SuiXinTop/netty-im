@@ -87,6 +87,11 @@
                 <artifactId>redis</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.suixin</groupId>
+                <artifactId>datasource</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

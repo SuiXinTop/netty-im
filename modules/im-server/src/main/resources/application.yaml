@@ -5,5 +5,41 @@ spring:
   main:
     allow-bean-definition-overriding: true
     web-application-type: none
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://118.31.15.127:3306/im?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: im
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: HiKari
+      max-lifetime: 300000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+      idle-timeout: 30000
+      minimum-idle: 3
+      maximum-pool-size: 12
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy年MM月dd日 HH:mm:ss
+  redis:
+    host: 118.31.15.127
+    database: 0
+    timeout: 3000
+    password: Zkm229544074
 
+netty:
+  websocket:
+    # Websocket服务端口
+    port: 8080
+    # 绑定的网卡
+    ip: 127.0.0.1
+    # URI路径
+    path: /im
+    readerIdleTime: 100
+    writerIdleTime: 100
+    allIdleTime: 120
 
+logging:
+  level:
+    org.springframework: warn

@@ -10,6 +10,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,6 +24,18 @@ public class ImChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Autowired
     private GroupMsgHandler groupMsgHandler;
+
+    @Value("${netty.websocket.path}")
+    private String path;
+
+    @Value("${netty.websocket.readerIdleTime}")
+    private int readerIdleTime;
+
+    @Value("${netty.websocket.writerIdleTime}")
+    private int writerIdleTime;
+
+    @Value("${netty.websocket.allIdleTime}")
+    private int allIdleTime;
 
     protected void initChannel(SocketChannel sc) {
         ChannelPipeline pipeline = sc.pipeline();
@@ -40,7 +53,7 @@ public class ImChannelInitializer extends ChannelInitializer<SocketChannel> {
                   针对客户端，如果在时间内没有向服务端发送读写心跳（ALL），则主动断开连接
                   如果有读空闲和写空闲，则不做任何处理
                  */
-                .addLast(new IdleStateHandler(100, 100, 120))
+                .addLast(new IdleStateHandler(readerIdleTime, writerIdleTime, allIdleTime))
                 //自定义的空闲状态检测的handler
                 .addLast(HeartBeatHandler.getInstance())
                 /*
@@ -49,7 +62,7 @@ public class ImChannelInitializer extends ChannelInitializer<SocketChannel> {
                   浏览器请求时，ws://localhost:7000/XXX 表示请求的资源
                   核心功能是 将http协议升级为ws协议，保持长连接
                  */
-                .addLast(new WebSocketServerProtocolHandler("/im"))
+                .addLast(new WebSocketServerProtocolHandler(path))
                 .addLast(WebsocketHandler.getInstance())
                 .addLast(ImServerMsgHandler.getInstance())
                 .addLast(BindMsgHandler.getInstance())
