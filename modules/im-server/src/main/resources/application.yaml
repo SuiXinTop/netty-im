@@ -8,8 +8,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://118.31.15.127:3306/im?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: im
-    password: 123456
+    username:
+    password:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       pool-name: HiKari
@@ -26,7 +26,15 @@ spring:
     host: 118.31.15.127
     database: 0
     timeout: 3000
-    password: Zkm229544074
+    password:
+  data:
+    mongodb:
+      host: 118.31.15.127
+      port: 27017
+      database: im
+      authentication-database: admin
+      username:
+      password:
 
 netty:
   websocket:

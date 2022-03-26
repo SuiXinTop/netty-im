@@ -1,6 +1,6 @@
 package com.suixin.server.server.handler;
 
-import com.suixin.common.entity.po.ImMsg;
+import com.suixin.common.core.entity.po.ImMsg;
 import com.suixin.server.util.ChannelFactory;
 import com.suixin.server.util.WebSocketResult;
 import io.netty.channel.Channel;

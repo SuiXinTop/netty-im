@@ -1,6 +1,6 @@
 package com.suixin.server.server.handler;
 
-import com.suixin.common.entity.po.GroupMsg;
+import com.suixin.common.core.entity.po.GroupMsg;
 import com.suixin.server.util.ChannelFactory;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;

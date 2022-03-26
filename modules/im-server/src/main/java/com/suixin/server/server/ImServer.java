@@ -33,7 +33,10 @@ public class ImServer {
             //服务端启动辅助类
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(bossGroup, workerGroup)
-                    .option(ChannelOption.SO_BACKLOG, 1024)
+                    /*BACKLOG用于构造服务端套接字ServerSocket对象，标识当服务器请求处理线程全满时，
+                    用于临时存放已完成三次握手的请求的队列的最大长度。如果未设置或所设置的值小于1，Java将使用默认值50。
+                     */
+                    .option(ChannelOption.SO_BACKLOG, 128)
                     .channel(NioServerSocketChannel.class)
                     .localAddress(ip, port)
                     .childHandler(imChannelInitializer);

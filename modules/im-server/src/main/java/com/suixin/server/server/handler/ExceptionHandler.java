@@ -1,6 +1,6 @@
 package com.suixin.server.server.handler;
 
-import com.suixin.common.entity.dto.TransMsg;
+import com.suixin.common.core.entity.dto.TransMsg;
 import com.suixin.server.util.WebSocketResult;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

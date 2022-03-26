@@ -1,16 +1,15 @@
 package com.suixin.server.server.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.suixin.common.entity.dto.BindMsg;
-import com.suixin.common.entity.dto.TransMsg;
-import com.suixin.common.entity.po.GroupMsg;
-import com.suixin.common.entity.po.ImMsg;
+import com.suixin.common.core.entity.dto.BindMsg;
+import com.suixin.common.core.entity.dto.TransMsg;
+import com.suixin.common.core.entity.po.GroupMsg;
+import com.suixin.common.core.entity.po.ImMsg;
 import com.suixin.server.util.WebSocketResult;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import org.springframework.stereotype.Component;
 
 @ChannelHandler.Sharable
 public class ImServerMsgHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
