@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ImServer {
+
     @Autowired
     private ImChannelInitializer imChannelInitializer;
 

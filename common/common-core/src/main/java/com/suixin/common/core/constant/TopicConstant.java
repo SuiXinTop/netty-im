@@ -1,7 +1,7 @@
 package com.suixin.common.core.constant;
 
 
-public class Topic {
+public class TopicConstant {
     /**
      * 在线消息状态
      */

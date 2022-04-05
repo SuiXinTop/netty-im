@@ -1,23 +1,27 @@
 package com.suixin.common.core.enmu;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import lombok.Getter;
+
+
 /**
  * 操作人类别
  * 
- * @author ruoyi
  */
+@Getter
 public enum OperatorType {
-    /**
-     * 其它
-     */
-    OTHER,
 
-    /**
-     * 后台用户
-     */
-    MANAGE,
+    OTHER(0,"其他"),
+    MANAGE(1,"后台用户"),
+    USER(2,"手机端用户");
 
-    /**
-     * 手机端用户
-     */
-    USER
+    @EnumValue
+    private final int type;
+    private final String content;
+
+    OperatorType(int type, String content) {
+        this.type = type;
+        this.content = content;
+    }
+
 }

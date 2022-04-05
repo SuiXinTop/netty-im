@@ -1,5 +1,6 @@
 package com.suixin.common.core.entity.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,6 +17,9 @@ public class SingleMsg extends ImMsg implements Serializable {
     /**
      * 接收者
      */
-    private Integer receiverId;
+    private String receiverId;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
 }

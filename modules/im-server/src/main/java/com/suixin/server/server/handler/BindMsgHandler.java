@@ -10,6 +10,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 @ChannelHandler.Sharable
 public class BindMsgHandler extends SimpleChannelInboundHandler<BindTransMsg> {
 
+    private BindMsgHandler(){}
+
     private static final BindMsgHandler INSTANCE = new BindMsgHandler();
 
     public static BindMsgHandler getInstance() {
@@ -20,7 +22,9 @@ public class BindMsgHandler extends SimpleChannelInboundHandler<BindTransMsg> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, BindTransMsg msg) {
         System.out.println("BindMsgHandler");
+
         ChannelFactory.bind(msg.getUserId(), ctx.channel());
         ctx.writeAndFlush(WebSocketResult.trans(msg));
     }
+
 }

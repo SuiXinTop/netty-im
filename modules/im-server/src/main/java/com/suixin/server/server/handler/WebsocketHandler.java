@@ -44,7 +44,6 @@ public class WebsocketHandler extends SimpleChannelInboundHandler<WebSocketFrame
 
 //        判断是否是二进制消息，如果是二进制消息，就抛出异常
         if (msg instanceof BinaryWebSocketFrame) {
-            System.out.println("目前我们不支持二进制消息");
             throw new RuntimeException(this.getClass().getName() + ":不支持消息");
         }
 

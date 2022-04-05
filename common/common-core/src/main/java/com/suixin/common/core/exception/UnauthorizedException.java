@@ -3,8 +3,6 @@ package com.suixin.common.core.exception;
 /**
  * 授权异常
  *
- * @author zmr
- * @author lucas
  */
 public class UnauthorizedException extends RuntimeException {
 

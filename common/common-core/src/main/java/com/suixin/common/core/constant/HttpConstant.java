@@ -4,7 +4,7 @@ package com.suixin.common.core.constant;
  * 返回状态码
  * 
  */
-public class HttpStatus
+public class HttpConstant
 {
     /**
      * 操作成功

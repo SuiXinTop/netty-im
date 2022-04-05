@@ -1,5 +1,11 @@
 package com.suixin.common.core.entity.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.suixin.common.core.enmu.DeleteFlag;
+import com.suixin.common.core.enmu.GenderType;
+import com.suixin.common.core.enmu.StateType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,22 +14,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
  * @TableName im_user
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class ImUser implements Serializable {
-    /**
-     * 自增主键
-     */
-    private Integer userId;
 
     /**
      * uuid
      */
-    private String uuid;
+    @TableId(type = IdType.ASSIGN_UUID)
+    private String userId;
 
     /**
      * 昵称
@@ -38,7 +39,7 @@ public class ImUser implements Serializable {
     /**
      * 性别：男（1）、女（0）
      */
-    private Integer userSex;
+    private GenderType userSex;
 
     /**
      * 头像
@@ -58,12 +59,12 @@ public class ImUser implements Serializable {
     /**
      * 状态：封禁（0）、正常（1）
      */
-    private Integer userState;
+    private StateType userState;
 
     /**
      * 注销标记
      */
-    private Integer deleteFlag;
+    private DeleteFlag deleteFlag;
 
     /**
      * 注册时间
@@ -75,6 +76,7 @@ public class ImUser implements Serializable {
      */
     private Integer roleId;
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
 }

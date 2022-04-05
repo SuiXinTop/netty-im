@@ -1,25 +1,21 @@
 package com.suixin.common.core.enmu;
 
+
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 
-/**
- * 操作状态
- *
- */
 @Getter
-public enum BusinessState {
+public enum StateType {
 
-    FAIL(0,"失败"),
-
-    SUCCESS(1,"成功");
+    exception(0, "异常"),
+    normal(1, "正常");
 
     @EnumValue
-    private final int status;
+    private final int state;
     private final String content;
 
-    BusinessState(int status, String content) {
-        this.status = status;
+    StateType(int state, String content) {
+        this.state = state;
         this.content = content;
     }
 

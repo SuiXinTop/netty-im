@@ -8,8 +8,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
-@EnableAsync
-@EnableScheduling
 @SpringBootApplication
 @ComponentScan(basePackages = "com.suixin")
 public class ImServerApplication {

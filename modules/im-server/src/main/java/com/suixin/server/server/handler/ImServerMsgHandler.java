@@ -15,6 +15,8 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 @ChannelHandler.Sharable
 public class ImServerMsgHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
+    private ImServerMsgHandler(){}
+
     private static final ImServerMsgHandler INSTANCE = new ImServerMsgHandler();
 
     public static ImServerMsgHandler getInstance() {

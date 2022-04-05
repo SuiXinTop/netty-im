@@ -3,23 +3,18 @@ package com.suixin.common.core.enmu;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 
-/**
- * 操作状态
- *
- */
 @Getter
-public enum BusinessState {
+public enum DeleteFlag {
 
-    FAIL(0,"失败"),
-
-    SUCCESS(1,"成功");
+    undelete(0, "正常"),
+    delete(1, "删除");
 
     @EnumValue
-    private final int status;
+    private final int flag;
     private final String content;
 
-    BusinessState(int status, String content) {
-        this.status = status;
+    DeleteFlag(int flag, String content) {
+        this.flag = flag;
         this.content = content;
     }
 

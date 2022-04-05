@@ -5,7 +5,7 @@ import com.suixin.common.datasource.mongo.AbstractMongoDao;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ImMsgMongo extends AbstractMongoDao<SingleMsg> {
+public class SingleMsgMongo extends AbstractMongoDao<SingleMsg> {
 
     @Override
     protected Class<SingleMsg> getEntityClass(){

@@ -3,23 +3,19 @@ package com.suixin.common.core.enmu;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 
-/**
- * 操作状态
- *
- */
 @Getter
-public enum BusinessState {
+public enum GenderType {
 
-    FAIL(0,"失败"),
-
-    SUCCESS(1,"成功");
+    FEMALE(0, "女"),
+    MALE(1, "男"),
+    HIDE(2, "隐藏");
 
     @EnumValue
-    private final int status;
+    private final int type;
     private final String content;
 
-    BusinessState(int status, String content) {
-        this.status = status;
+    GenderType(int type, String content) {
+        this.type = type;
         this.content = content;
     }
 

@@ -11,7 +11,7 @@ public class ImMsg implements Serializable {
     /**
      * 发送者id
      */
-    private Integer senderId;
+    private String senderId;
 
     /**
      * 消息类型

@@ -1,5 +1,6 @@
 package com.suixin.common.core.entity.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.suixin.common.core.enmu.RequestState;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,6 +44,7 @@ public class GroupRequest implements Serializable {
      */
     private Date operateDate;
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
 }

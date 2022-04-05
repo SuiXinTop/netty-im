@@ -1,5 +1,8 @@
 package com.suixin.common.core.entity.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +11,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
  * @TableName im_group
  */
 @Data
@@ -17,14 +19,10 @@ import java.util.Date;
 public class ImGroup implements Serializable {
 
     /**
-     * 自增主键
-     */
-    private Integer groupId;
-
-    /**
      * 群uuid
      */
-    private String uuid;
+    @TableId(type = IdType.ASSIGN_UUID)
+    private String groupId;
 
     /**
      * 群名称
@@ -51,6 +49,7 @@ public class ImGroup implements Serializable {
      */
     private Date createTime;
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
 }

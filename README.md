@@ -6,6 +6,8 @@ Java、Spring、SpringBoot、Netty、RocketMQ、Mybatis-plus、Mongodb、Redis�
 
 ## 功能分析
 
+![](http://assets.processon.com/chart_image/624bc4166376890701a698b6.png)
+
 ```
 - 用户端
     - 登陆

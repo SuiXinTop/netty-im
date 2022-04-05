@@ -1,4 +1,4 @@
-package com.suixin.common.security.advice;
+package com.suixin.common.security.aspect;
 
 import com.suixin.common.security.annotation.Log;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 @RequiredArgsConstructor
-public class LogAdvice {
+public class LogAspect {
     private final HttpServletRequest request;
 
     /**
@@ -46,7 +46,6 @@ public class LogAdvice {
 
         } catch (Exception exp) {
             log.error("异常信息:{}", exp.getMessage());
-            exp.printStackTrace();
         }
     }
 }

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class ImChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     @Autowired
-    private ImMsgHandler imMsgHandler;
+    private SingleMsgHandler singleMsgHandler;
 
     @Autowired
     private GroupMsgHandler groupMsgHandler;
@@ -66,7 +66,7 @@ public class ImChannelInitializer extends ChannelInitializer<SocketChannel> {
                 .addLast(WebsocketHandler.getInstance())
                 .addLast(ImServerMsgHandler.getInstance())
                 .addLast(BindMsgHandler.getInstance())
-                .addLast(imMsgHandler)
+                .addLast(singleMsgHandler)
                 .addLast(groupMsgHandler)
                 .addLast(ExceptionHandler.getInstance())
         ;

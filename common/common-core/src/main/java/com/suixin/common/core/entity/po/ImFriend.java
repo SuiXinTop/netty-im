@@ -1,5 +1,6 @@
 package com.suixin.common.core.entity.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,7 @@ public class ImFriend implements Serializable {
      */
     private Integer deleteFlag;
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
 }

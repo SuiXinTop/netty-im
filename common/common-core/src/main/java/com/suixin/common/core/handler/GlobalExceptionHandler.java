@@ -1,7 +1,10 @@
 package com.suixin.common.core.handler;
 
+import com.suixin.common.core.constant.HttpConstant;
 import com.suixin.common.core.entity.dto.RestMsg;
+import com.suixin.common.core.exception.ForbiddenException;
 import com.suixin.common.core.exception.ServiceException;
+import com.suixin.common.core.exception.UnauthorizedException;
 import com.suixin.common.core.exception.user.UserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.ObjectError;
@@ -32,7 +35,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public RestMsg<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e) {
-        log.error("不支持请求,{}", e.getMethod());
         return RestMsg.fail("请求方式不支持");
     }
 
@@ -44,7 +46,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public RestMsg<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error("参数异常");
         //打印校验住的所有的错误信息
         StringBuilder msg = new StringBuilder("参数错误：[");
         List<ObjectError> list = e.getAllErrors();
@@ -56,28 +57,28 @@ public class GlobalExceptionHandler {
         return RestMsg.fail(msg.toString());
     }
 
-//    /**
-//     * Handle 未登录异常
-//     *
-//     * @param e the e
-//     * @return the rest msg
-//     */
-//    @ExceptionHandler(UnauthorizedException.class)
-//    public RestMsg handleUnauthorizedException(UnauthorizedException e) {
-//        return RestMsg.fail(HttpConstant.UNAUTHORIZED, e.getMessage(), null);
-//    }
+    /**
+     * Handle 未登录异常
+     *
+     * @param e the e
+     * @return the rest msg
+     */
+    @ExceptionHandler(UnauthorizedException.class)
+    public RestMsg<Object> handleUnauthorizedException(UnauthorizedException e) {
+        return RestMsg.fail(HttpConstant.UNAUTHORIZED, e.getMessage(), null);
+    }
 
 
-//    /**
-//     * Handle 权限不足异常
-//     *
-//     * @param e the e
-//     * @return the rest msg
-//     */
-//    @ExceptionHandler(ForbiddenException.class)
-//    public RestMsg handleForbiddenException(ForbiddenException e) {
-//        return RestMsg.fail(HttpConstant.FORBIDDEN, e.getMessage(), null);
-//    }
+    /**
+     * Handle 权限不足异常
+     *
+     * @param e the e
+     * @return the rest msg
+     */
+    @ExceptionHandler(ForbiddenException.class)
+    public RestMsg<Object> handleForbiddenException(ForbiddenException e) {
+        return RestMsg.fail(HttpConstant.FORBIDDEN, e.getMessage(), null);
+    }
 
     /**
      * 用户异常
@@ -87,7 +88,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(UserException.class)
     public RestMsg<Object> handleUserException(UserException e) {
-        log.error("发生用户异常");
         return RestMsg.fail(e.getMessage());
     }
 
@@ -99,7 +99,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ServiceException.class)
     public RestMsg<Object> handleServiceException(ServiceException e) {
-        log.error("发生业务异常");
         return RestMsg.fail(e.getMessage());
     }
 
@@ -111,7 +110,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(RuntimeException.class)
     public RestMsg<Object> handleRuntimeException(RuntimeException e) {
-        log.error("发生未知异常.", e);
         return RestMsg.fail(e.getMessage());
     }
 
@@ -124,7 +122,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public RestMsg<Object> handleException(Exception e) {
-        log.error("发生系统异常.", e);
         return RestMsg.fail(e.getMessage());
     }
 }
