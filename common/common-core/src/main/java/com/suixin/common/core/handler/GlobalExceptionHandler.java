@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
      * @return the rest msg
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public RestMsg handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e) {
+    public RestMsg<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e) {
         log.error("不支持请求,{}", e.getMethod());
         return RestMsg.fail("请求方式不支持");
     }
@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
      * @return rest msg
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public RestMsg handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+    public RestMsg<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("参数异常");
         //打印校验住的所有的错误信息
         StringBuilder msg = new StringBuilder("参数错误：[");
@@ -86,7 +86,7 @@ public class GlobalExceptionHandler {
      * @return the rest msg
      */
     @ExceptionHandler(UserException.class)
-    public RestMsg handleUserException(UserException e) {
+    public RestMsg<Object> handleUserException(UserException e) {
         log.error("发生用户异常");
         return RestMsg.fail(e.getMessage());
     }
@@ -98,7 +98,7 @@ public class GlobalExceptionHandler {
      * @return the rest msg
      */
     @ExceptionHandler(ServiceException.class)
-    public RestMsg handleServiceException(ServiceException e) {
+    public RestMsg<Object> handleServiceException(ServiceException e) {
         log.error("发生业务异常");
         return RestMsg.fail(e.getMessage());
     }
@@ -110,7 +110,7 @@ public class GlobalExceptionHandler {
      * @return the rest msg
      */
     @ExceptionHandler(RuntimeException.class)
-    public RestMsg handleRuntimeException(RuntimeException e) {
+    public RestMsg<Object> handleRuntimeException(RuntimeException e) {
         log.error("发生未知异常.", e);
         return RestMsg.fail(e.getMessage());
     }
@@ -123,7 +123,7 @@ public class GlobalExceptionHandler {
      * @return the rest msg
      */
     @ExceptionHandler(Exception.class)
-    public RestMsg handleException(Exception e) {
+    public RestMsg<Object> handleException(Exception e) {
         log.error("发生系统异常.", e);
         return RestMsg.fail(e.getMessage());
     }

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.suixin.common.security.advice.LogAdvice,\
+  com.suixin.common.security.advice.TokenAdvice

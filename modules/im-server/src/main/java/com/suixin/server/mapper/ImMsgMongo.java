@@ -1,15 +1,15 @@
 package com.suixin.server.mapper;
 
-import com.suixin.common.core.entity.po.ImMsg;
+import com.suixin.common.core.entity.po.SingleMsg;
 import com.suixin.common.datasource.mongo.AbstractMongoDao;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ImMsgMongo extends AbstractMongoDao<ImMsg> {
+public class ImMsgMongo extends AbstractMongoDao<SingleMsg> {
 
     @Override
-    protected Class<ImMsg> getEntityClass(){
-        return ImMsg.class;
+    protected Class<SingleMsg> getEntityClass(){
+        return SingleMsg.class;
     }
 
 }

@@ -14,13 +14,14 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestMsg implements Serializable {
+public class RestMsg<T> implements Serializable {
 
     private int code;
 
     private String msg;
 
-    private Object data;
+    private T data;
+
 
     /**
      * 消息返回方法
@@ -30,8 +31,8 @@ public class RestMsg implements Serializable {
      * @param data the data
      * @return result msg
      */
-    public static RestMsg success(int code, String msg, Object data) {
-        return new RestMsg(code, msg, data);
+    public static <T> RestMsg<T> success(int code, String msg, T data) {
+        return new RestMsg<>(code, msg, data);
     }
 
     /**
@@ -42,8 +43,8 @@ public class RestMsg implements Serializable {
      * @param data the data
      * @return the result msg
      */
-    public static RestMsg fail(int code, String msg, Object data) {
-        return new RestMsg(code, msg, data);
+    public static <T> RestMsg<T> fail(int code, String msg, T data) {
+        return new RestMsg<>(code, msg, data);
     }
 
     /**
@@ -52,7 +53,7 @@ public class RestMsg implements Serializable {
      * @param data the data
      * @return the result msg
      */
-    public static RestMsg success(Object data) {
+    public static <T> RestMsg<T> success(T data) {
         return success(200, "操作成功", data);
     }
 
@@ -62,7 +63,7 @@ public class RestMsg implements Serializable {
      * @param data the data
      * @return the result msg
      */
-    public static RestMsg success(String msg, Object data) {
+    public static <T> RestMsg<T> success(String msg, T data) {
         return success(200, msg, data);
     }
 
@@ -73,7 +74,7 @@ public class RestMsg implements Serializable {
      * @param msg the msg
      * @return the result msg
      */
-    public static RestMsg fail(String msg) {
+    public static <T> RestMsg<T> fail(String msg) {
         return fail(400, msg, null);
     }
 
@@ -84,7 +85,7 @@ public class RestMsg implements Serializable {
      * @param data the data
      * @return the result msg
      */
-    public static RestMsg fail(String msg, Object data) {
+    public static <T> RestMsg<T> fail(String msg, T data) {
         return fail(400, msg, data);
     }
 

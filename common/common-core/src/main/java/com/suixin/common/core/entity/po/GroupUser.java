@@ -31,7 +31,7 @@ public class GroupUser implements Serializable {
     private Integer userId;
 
     /**
-     * 群内身份
+     * 群内身份 （普通/管理/群主）
      */
     private Integer groupRole;
 

@@ -2,6 +2,7 @@ package com.suixin.server.server.handler;
 
 import com.suixin.common.core.entity.po.GroupMsg;
 import com.suixin.server.util.ChannelFactory;
+import com.suixin.server.util.WebSocketResult;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -28,7 +29,7 @@ public class GroupMsgHandler extends SimpleChannelInboundHandler<GroupMsg> {
         idList.forEach(userId -> {
             Channel channel = ChannelFactory.getChannel(userId.toString());
             if (channel != null) {
-                channel.writeAndFlush(msg);
+                channel.writeAndFlush(WebSocketResult.trans(msg));
             }
         });
     }

@@ -5,8 +5,7 @@ package com.suixin.common.core.enmu;
  * 
  * @author ruoyi
  */
-public enum OperatorType
-{
+public enum OperatorType {
     /**
      * 其它
      */

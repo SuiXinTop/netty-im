@@ -14,19 +14,20 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyFriend implements Serializable {
+public class ImFriend implements Serializable {
+
     /**
      * 自增主键
      */
     private Integer friendId;
 
     /**
-     * 用户1id
+     * 用户1 id
      */
     private Integer firstUserId;
 
     /**
-     * 用户2id
+     * 用户2 id
      */
     private Integer secondUserId;
 

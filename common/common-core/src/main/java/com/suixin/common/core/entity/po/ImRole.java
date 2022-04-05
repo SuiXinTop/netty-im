@@ -14,6 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImRole implements Serializable {
+
     /**
      * 自增主键
      */

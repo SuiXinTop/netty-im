@@ -1,5 +1,7 @@
 package com.suixin.common.core.entity.dto;
 
+
+import com.suixin.common.core.enmu.MsgAction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,10 +13,19 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class TransMsg implements Serializable {
 
-    private int action;//动作类型
+    /**
+     * 推送类型
+     */
+    private MsgAction action;
 
-    private int chatType;// 0/1
+    /**
+     * 私聊/群聊
+     */
+    private int chatType;
 
-    private String extend;//扩展字段
+    /**
+     * 扩展字段
+     */
+    private String extend;
 
 }

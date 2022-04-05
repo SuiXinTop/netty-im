@@ -1,10 +1,11 @@
 package com.suixin.server.server.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.suixin.common.core.entity.dto.BindMsg;
+import com.suixin.common.core.enmu.MsgAction;
+import com.suixin.common.core.entity.bo.BindTransMsg;
 import com.suixin.common.core.entity.dto.TransMsg;
 import com.suixin.common.core.entity.po.GroupMsg;
-import com.suixin.common.core.entity.po.ImMsg;
+import com.suixin.common.core.entity.po.SingleMsg;
 import com.suixin.server.util.WebSocketResult;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -24,33 +25,33 @@ public class ImServerMsgHandler extends SimpleChannelInboundHandler<TextWebSocke
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
         System.out.println("IMServerHandler");
-        TransMsg transMsg = null;
+        TransMsg transMsg;
         try {
             transMsg = JSON.parseObject(msg.retain().text(), TransMsg.class);
         } catch (Exception e) {
-            transMsg = new TransMsg(9, 9, "暂不支持该消息");
+            transMsg = new TransMsg(MsgAction.ERROR, 9, "暂不支持该消息");
         }
-        System.out.println(transMsg);
-        int action = transMsg.getAction();
+
+        MsgAction action = transMsg.getAction();
         /*
         初始化连接或重连
         初始化channel，关联 channel 和 userid
          */
-        if (action == 1) {
-            BindMsg bindMsg = JSON.parseObject(msg.text(), BindMsg.class);
-            System.out.println(bindMsg);
-            ctx.fireChannelRead(bindMsg);
+        if (action.getType() == 1) {
+            BindTransMsg bindTransMsg = JSON.parseObject(msg.text(), BindTransMsg.class);
+            System.out.println(bindTransMsg);
+            ctx.fireChannelRead(bindTransMsg);
         }
         /*
         聊天消息处理
          */
-        else if (action == 2) {
+        else if (action.getType() == 2) {
             //群聊或私聊
             switch (transMsg.getChatType()) {
                 case 0://私聊
-                    ImMsg imMsg = JSON.parseObject(msg.text(), ImMsg.class);
-                    System.out.println(imMsg);
-                    ctx.fireChannelRead(imMsg);
+                    SingleMsg singleMsg = JSON.parseObject(msg.text(), SingleMsg.class);
+                    System.out.println(singleMsg);
+                    ctx.fireChannelRead(singleMsg);
 
                     break;
                 case 1://群聊
@@ -65,9 +66,11 @@ public class ImServerMsgHandler extends SimpleChannelInboundHandler<TextWebSocke
         /*
         心跳包处理
          */
-        else if (action == 3) {
+        else if (action.getType() == 3) {
+            //TODO
+        }
 
-        } else {
+        else {
             ctx.writeAndFlush(WebSocketResult.trans(transMsg));
         }
 

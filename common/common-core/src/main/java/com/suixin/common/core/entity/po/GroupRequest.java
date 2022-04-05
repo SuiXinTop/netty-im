@@ -8,14 +8,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 
- * @TableName friend_request
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FriendRequest implements Serializable {
+public class GroupRequest implements Serializable {
 
     /**
      * 自增主键
@@ -30,7 +26,7 @@ public class FriendRequest implements Serializable {
     /**
      * 接收者
      */
-    private Integer receiverId;
+    private Integer groupId;
 
     /**
      * 请求状态。0：未通过；1：通过；2：未处理

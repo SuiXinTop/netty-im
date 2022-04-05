@@ -25,6 +25,16 @@ public enum BusinessType {
     DELETE,
 
     /**
+     * 登录
+     */
+    LOGIN,
+
+    /**
+     * 退出
+     */
+    LOGOUT,
+
+    /**
      * 授权
      */
     GRANT,

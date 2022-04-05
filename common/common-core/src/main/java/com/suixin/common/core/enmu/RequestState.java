@@ -3,8 +3,9 @@ package com.suixin.common.core.enmu;
 
 public enum RequestState {
 
-    IGNORE(0, "忽略"),
-    PASS(1, "通过");
+    NO_PASS(0, "未通过"),
+    PASS(1, "通过"),
+    IGNORE(2,"未处理");
 
     public final int type;
     public final String msg;

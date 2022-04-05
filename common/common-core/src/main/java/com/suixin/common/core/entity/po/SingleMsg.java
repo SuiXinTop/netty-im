@@ -7,18 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * @TableName group_msg
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class GroupMsg extends ImMsg implements Serializable {
+public class SingleMsg extends ImMsg implements Serializable {
 
     /**
-     * 群id
+     * 接收者
      */
-    private Integer groupId;
+    private Integer receiverId;
 
 }

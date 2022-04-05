@@ -23,7 +23,7 @@ public class ImUser implements Serializable {
     /**
      * uuid
      */
-    private String userUuid;
+    private String uuid;
 
     /**
      * 昵称

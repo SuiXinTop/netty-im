@@ -15,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImGroup implements Serializable {
+
     /**
      * 自增主键
      */
@@ -23,7 +24,7 @@ public class ImGroup implements Serializable {
     /**
      * 群uuid
      */
-    private String groupUuid;
+    private String uuid;
 
     /**
      * 群名称

@@ -2,7 +2,7 @@ package com.suixin.common.security.advice;
 
 import com.suixin.common.core.exception.UnauthorizedException;
 import com.suixin.common.core.util.RequestUtil;
-import com.suixin.common.redis.service.RedisService;
+import com.suixin.common.redis.service.impl.RedisServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class TokenAdvice {
     private final HttpServletRequest request;
-    private final RedisService redisService;
+    private final RedisServiceImpl redisServiceImpl;
 
     /**
      * 定义一个切点

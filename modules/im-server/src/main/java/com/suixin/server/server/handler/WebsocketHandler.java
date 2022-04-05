@@ -9,6 +9,8 @@ import io.netty.handler.codec.http.websocketx.*;
 @ChannelHandler.Sharable
 public class WebsocketHandler extends SimpleChannelInboundHandler<WebSocketFrame> {
 
+    private WebsocketHandler(){}
+
     private static final WebsocketHandler INSTANCE = new WebsocketHandler();
 
     public static WebsocketHandler getInstance() {
@@ -24,11 +26,7 @@ public class WebsocketHandler extends SimpleChannelInboundHandler<WebSocketFrame
     //客户端与服务端断开连接
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
-        try {
-            ChannelFactory.unbind(ctx.channel());
-        } catch (Exception ignored) {
-
-        }
+        ChannelFactory.unbind(ctx.channel());
         System.out.println("客户端与服务端连接关闭....");
     }
 

@@ -19,10 +19,20 @@
         <dependency>
             <groupId>com.suixin</groupId>
             <artifactId>common-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-annotation</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.suixin</groupId>
             <artifactId>common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.suixin</groupId>
+            <artifactId>common-datasource</artifactId>
         </dependency>
     </dependencies>
 

@@ -14,6 +14,8 @@ import io.netty.handler.timeout.IdleStateEvent;
 @ChannelHandler.Sharable
 public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
+    private HeartBeatHandler(){}
+
     private static final HeartBeatHandler INSTANCE = new HeartBeatHandler();
 
     public static HeartBeatHandler getInstance() {
@@ -28,12 +30,6 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;
-            if (event.state() == IdleState.READER_IDLE) {
-                //TODO
-            }
-            if (event.state() == IdleState.WRITER_IDLE) {
-                //TODO
-            }
             if (event.state() == IdleState.ALL_IDLE) {
                 System.out.println("进入读写空闲......");
                 System.out.println("channel 关闭之前：users 的数量为："+ChannelFactory.channelGroup.size());

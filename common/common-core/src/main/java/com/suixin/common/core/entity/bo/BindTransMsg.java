@@ -1,5 +1,6 @@
-package com.suixin.common.core.entity.dto;
+package com.suixin.common.core.entity.bo;
 
+import com.suixin.common.core.entity.dto.TransMsg;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +12,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class BindMsg extends TransMsg implements Serializable {
+public class BindTransMsg extends TransMsg implements Serializable {
+
     private String userId;
+
 }
